@@ -1,0 +1,10 @@
+{
+  "name": "sizzle",
+  "title": "sizzle",
+  "id": "jid1-OEA4D0KVYgiOtA",
+  "description": "Highlight the sizzling posts when viewing a Tumblr blog's archive!",
+  "author": "Brice Burgess <bhb@iceburg.net>",
+  "license": "MPL 2.0",
+  "version": "1.0.0",
+  "permissions": {"private-browsing": true}
+}
