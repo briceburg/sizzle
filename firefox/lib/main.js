@@ -4,7 +4,8 @@ var data = require("sdk/self").data,
 	pageMod = require("sdk/page-mod"),
 	prefs = require("sdk/simple-prefs").prefs,
 	css = require("./vcss"),
-	stylesheet = css.genFromPrefs(data.load("sizzle-archive-highlight.vcss"), prefs);
+	stylesheet = css.genFromPrefs(data.load("sizzle-archive-highlight.vcss"), prefs),
+	workers = [];
 
 
 pageMod.PageMod({
@@ -13,6 +14,7 @@ pageMod.PageMod({
 	                    data.url("sizzle-archive-highlight.js")],
 	contentStyle: stylesheet,
 	onAttach: function(worker){
+		registerWorker(worker);
 		worker.port.emit("registerPrefs", prefs);
 	}
 });
@@ -36,6 +38,21 @@ function onPrefChange(prefName){
 }
 require("sdk/simple-prefs").on("", onPrefChange);
 
+
+//
+// worker registry
+//
+
+function registerWorker(worker) {
+	workers.push(worker);
+	worker.on('detach', function(){
+		var index = workers.indexOf(this);
+		if(index != -1)
+		{
+			workers.splice(index, 1);
+		}
+	});
+}
 
 //debug
 
