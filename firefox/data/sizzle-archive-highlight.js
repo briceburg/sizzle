@@ -13,6 +13,12 @@ self.port.on("registerPrefs", function(prefs){
 	visibleOffset = prefs['visibleOffset'];
 });
 
+self.port.on("registerStyle", function(stylesheet){
+	console.log('REGISTR STYLE...........................................................................................................................................................................................................................................................................................................................................................................................................................................................');
+	console.log(stylesheet);
+	$('head').append('<style type="text/css">' + stylesheet + '</style>');
+});
+
 
 function inViewPort(el) {
 	var pos = el.getBoundingClientRect();

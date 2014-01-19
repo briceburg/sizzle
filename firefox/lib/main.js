@@ -12,10 +12,8 @@ pageMod.PageMod({
 	include: /.*\.tumblr\.com\/archive.*/,
 	contentScriptFile: [data.url("vendor/jquery-2.0.3.min.js"),
 	                    data.url("sizzle-archive-highlight.js")],
-	contentStyle: stylesheet,
 	onAttach: function(worker){
 		registerWorker(worker);
-		worker.port.emit("registerPrefs", prefs);
 	}
 });
 
@@ -34,9 +32,13 @@ function onPrefChange(prefName){
 	if(prefName.indexOf("vcss_") == 0)
 	{
 		stylesheet = css.genFromPrefs(data.load("sizzle-archive-highlight.vcss"), prefs);
+		workers.forEach(function(worker, i, workers){
+			worker.port.emit("registerStyle", stylesheet);
+		});
 	}
 }
 require("sdk/simple-prefs").on("", onPrefChange);
+
 
 
 //
@@ -52,6 +54,9 @@ function registerWorker(worker) {
 			workers.splice(index, 1);
 		}
 	});
+	
+	worker.port.emit("registerPrefs", prefs);
+	worker.port.emit("registerStyle", stylesheet);
 }
 
 //debug
