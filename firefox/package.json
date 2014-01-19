@@ -33,7 +33,7 @@
   	"type": "integer",
   	"value": 120
   },{
-  	"name": "color",
+  	"name": "vcss_color",
   	"title": "border color",
   	"description": "border collor",
   	"type": "color", 

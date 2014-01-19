@@ -4,8 +4,7 @@
 var highlightStrategy = 'percent',	// ['percent','fixed'] method to determine number of posts highlighted
 	highlightPercent = 30,			//  30% of visible posts will be highlighted,
 	highlightFixed = 10,			// 10 visible posts will be highlighted
-	visibleOffset = 120,			// pixels thumbnail can hang below viewport to remain eligible for highlighting
-	prefs = {};						// simple-prefs populated from main.js
+	visibleOffset = 120;			// pixels thumbnail can hang below viewport to remain eligible for highlighting
 
 self.port.on("registerPrefs", function(addonPrefs){
 	highlightStrategy = prefs['highlightStrategy'];

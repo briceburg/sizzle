@@ -2,14 +2,16 @@ var data = require("sdk/self").data,
 	tabs = require("sdk/tabs"),
 	widgets = require("sdk/widget"),
 	pageMod = require("sdk/page-mod"),
-	prefs = require("sdk/simple-prefs").prefs;
+	prefs = require("sdk/simple-prefs").prefs,
+	css = require("./vcss"),
+	stylesheet = css.genFromPrefs(data.load("sizzle-archive-highlight.vcss"), prefs);
 
 
 pageMod.PageMod({
 	include: /.*\.tumblr\.com\/archive.*/,
 	contentScriptFile: [data.url("vendor/jquery-2.0.3.min.js"),
 	                    data.url("sizzle-archive-highlight.js")],
-	contentStyleFile: data.url("sizzle-archive-highlight.css")
+	contentStyle: stylesheet,
 	onAttach: function(worker){
 		worker.port.emit("registerPrefs", prefs);
 	}
@@ -20,6 +22,19 @@ var widget = widgets.Widget({
 	label: "sizzle",
 	contentURL: data.url("sizzle.ico")
 });
+
+
+//
+// when preference changes occur, re-compile variable-CSS
+//
+
+function onPrefChange(prefName){
+	if(prefName.indexOf("vcss_") == 0)
+	{
+		stylesheet = css.genFromPrefs(data.load("sizzle-archive-highlight.vcss"), prefs);
+	}
+}
+require("sdk/simple-prefs").on("", onPrefChange);
 
 
 //debug
