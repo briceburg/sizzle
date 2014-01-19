@@ -12,9 +12,15 @@ pageMod.PageMod({
 	contentStyleFile: data.url("sizzle-archive-highlight.css")
 });
 
+var widget = widgets.Widget({
+	id: "sizzle-widget",
+	label: "sizzle",
+	contentURL: data.url("sizzle.ico")
+});
 
 
 //debug
 //tabs.open("http://gladyourenothere.tumblr.com/archive");
 console.log(prefs['color']);
 // !debug
+
