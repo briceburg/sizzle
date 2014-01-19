@@ -3,8 +3,16 @@
   "title": "sizzle",
   "id": "jid1-OEA4D0KVYgiOtA",
   "description": "Highlight the sizzling posts when viewing a Tumblr blog's archive!",
-  "author": "Brice Burgess <bhb@iceburg.net>",
+  "author": "Brice Burgess @iceburg_net",
   "license": "MPL 2.0",
   "version": "1.0.0",
-  "permissions": {"private-browsing": true}
+  
+  "permissions": {"private-browsing": true},
+  "preferences": [{
+  	"name": "color",
+  	"title": "border color",
+  	"description": "border collor",
+  	"type": "color", 
+  	"value": "#FF0000"
+  }]
 }

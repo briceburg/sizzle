@@ -1,8 +1,8 @@
 var data = require("sdk/self").data,
 	tabs = require("sdk/tabs"),
-	pageMod = require("sdk/page-mod");
-
-
+	widgets = require("sdk/widget"),
+	pageMod = require("sdk/page-mod"),
+	prefs = require('sdk/simple-prefs').prefs;
 
 
 pageMod.PageMod({
@@ -13,44 +13,8 @@ pageMod.PageMod({
 });
 
 
-// tabs.open("http://gladyourenothere.tumblr.com/archive");
 
-
-/*
-
-var pageMod = require("")
-
-
-var widgets = require("sdk/widget");
-var tabs = require("sdk/tabs").on("ready", logURL);
-var self = require("sdk/self");
-
-
-function logURL(tab){
-	console.log(tab.url);
-}
-
-var clockPanel = require("sdk/panel").Panel({
-	width: 215,
-	height: 160,
-	contentURL: "http://www.mozilla.org/"
-});
-
-
-var widget = widgets.Widget({
-  id: "mozilla-link",
-  label: "Mozilla website",
-  contentURL: "http://www.mozilla.org/favicon.ico",
-  contentScriptFile: self.data.url("click-listener.js"),
-  panel: clockPanel
-});
-
-widget.port.on("left-click", function(){
-	console.log("LEFT");
-});
-
-widget.port.on("right-click", function(){
-	console.log("RGHT");
-});
-
-*/
+//debug
+//tabs.open("http://gladyourenothere.tumblr.com/archive");
+console.log(prefs['color']);
+// !debug
