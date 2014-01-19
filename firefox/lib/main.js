@@ -2,7 +2,7 @@ var data = require("sdk/self").data,
 	tabs = require("sdk/tabs"),
 	widgets = require("sdk/widget"),
 	pageMod = require("sdk/page-mod"),
-	prefs = require('sdk/simple-prefs').prefs;
+	prefs = require("sdk/simple-prefs").prefs;
 
 
 pageMod.PageMod({
@@ -10,6 +10,9 @@ pageMod.PageMod({
 	contentScriptFile: [data.url("vendor/jquery-2.0.3.min.js"),
 	                    data.url("sizzle-archive-highlight.js")],
 	contentStyleFile: data.url("sizzle-archive-highlight.css")
+	onAttach: function(worker){
+		worker.port.emit("registerPrefs", prefs);
+	}
 });
 
 var widget = widgets.Widget({
@@ -20,7 +23,9 @@ var widget = widgets.Widget({
 
 
 //debug
-//tabs.open("http://gladyourenothere.tumblr.com/archive");
+
+tabs.open("http://gladyourenothere.tumblr.com/archive");
 console.log(prefs['color']);
+
 // !debug
 

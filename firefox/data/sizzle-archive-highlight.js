@@ -1,10 +1,19 @@
 
 // @todo use an in-memory binary tree
 
-var highlightMethod = 'percent',	// ['percent','fixed'] method to determine number of posts highlighted
+var highlightStrategy = 'percent',	// ['percent','fixed'] method to determine number of posts highlighted
 	highlightPercent = 30,			//  30% of visible posts will be highlighted,
-	highlightFixed = 9000,			// 10 visible posts will be highlighted
-	visibleOffset = 120;			// pixels thumbnail can hang below viewport to remain eligible for highlighting
+	highlightFixed = 10,			// 10 visible posts will be highlighted
+	visibleOffset = 120,			// pixels thumbnail can hang below viewport to remain eligible for highlighting
+	prefs = {};						// simple-prefs populated from main.js
+
+self.port.on("registerPrefs", function(addonPrefs){
+	highlightStrategy = prefs['highlightStrategy'];
+	highlightPercent = prefs['highlightPercent'];
+	highlightFixed = prefs['highlightFixed'];
+	visibleOffset = prefs['visibleOffset'];
+});
+
 
 function inViewPort(el) {
 	var pos = el.getBoundingClientRect();
@@ -18,6 +27,7 @@ function inViewPort(el) {
 };
 
 function highlightVisiblePosts() {
+	
 	var notedPosts = [];
 	
 	$("div.post").each(function(){
@@ -36,7 +46,7 @@ function highlightVisiblePosts() {
 		return b.notes - a.notes;
 	});
 	
-	var highlightsToMake = (highlightMethod == 'percent') ?
+	var highlightsToMake = (highlightStrategy == 'percent') ?
 			Math.round(notedPosts.length * (highlightPercent / 100)) :
 			highlightFixed;
 			

@@ -9,10 +9,35 @@
   
   "permissions": {"private-browsing": true},
   "preferences": [{
+  	"name": "highlightStrategy",
+  	"title": "highlight strategy",
+  	"description": "highlight strategy (fixed or percentage)",
+  	"type": "string",
+  	"value": "percent"
+  },{
+  	"name": "highlightPercent",
+  	"title": "highlight percent",
+  	"description": "percentage of visible posts to highlight for notability [percent strategy]",
+  	"type": "integer",
+  	"value": 30
+  },{
+  	"name": "highlightFixed",
+  	"title": "highlight count",
+  	"description": "number of visible posts to highlight for notability [fixed strategy]",
+  	"type": "integer",
+  	"value": 10
+  },{
+  	"name": "visibleOffset",
+  	"title": "hanging chad",
+  	"description": "pixels thumbnail can hang below viewport to remain eligible for highlighting [all strategies]s",
+  	"type": "integer",
+  	"value": 120
+  },{
   	"name": "color",
   	"title": "border color",
   	"description": "border collor",
   	"type": "color", 
-  	"value": "#FF0000"
+  	"value": "#FFFF00"
   }]
 }
+		
