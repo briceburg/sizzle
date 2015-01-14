@@ -8,6 +8,8 @@ var data = require("sdk/self").data,
 	workers = [];
 
 
+// tumblr enhancements
+// ///////////////////
 pageMod.PageMod({
 	include: /.*\.tumblr\.com\/archive.*/,
 	contentScriptFile: [data.url("vendor/jquery-2.0.3.min.js"),
@@ -17,6 +19,19 @@ pageMod.PageMod({
 	}
 });
 
+// quote.yahoo.com enhancements
+// ////////////////////////////
+pageMod.PageMod({
+	include: /.*finance\.yahoo\.com\/q\/op\?.*/,
+	contentScriptFile: [data.url("vendor/jquery-2.0.3.min.js"),
+	                    data.url("finance-yahoo-options-enhance.js")],
+	onAttach: function(worker){
+		registerWorker(worker);
+	}
+});
+
+// sizzle widget
+// /////////////
 var widget = widgets.Widget({
 	id: "sizzle-widget",
 	label: "sizzle",
@@ -60,9 +75,9 @@ function registerWorker(worker) {
 }
 
 //debug
-
-tabs.open("http://gladyourenothere.tumblr.com/archive");
-console.log(prefs['color']);
+tabs.open("http://finance.yahoo.com/q/op?s=AA+Options");
+//tabs.open("http://gladyourenothere.tumblr.com/archive");
+//console.log(prefs['color']);
 
 // !debug
 
